@@ -13,6 +13,7 @@ namespace Air_Hockey
 {
     public partial class Form1 : Form
     {
+        #region global variables
         int paddle1X = 375;
         int paddle1Y = 20;
         int player1Score = 0;
@@ -41,6 +42,13 @@ namespace Air_Hockey
         bool rightArrowDown = false;
         bool leftArrowDown = false;
 
+        int topcourt = 5;
+        int bottomcourt = 572;
+        int leftwall = 210;
+        int rightwall = 570;
+        #endregion
+
+        #region pens & brushes
         SolidBrush blueBrush = new SolidBrush(Color.DodgerBlue);
         SolidBrush whiteBrush = new SolidBrush(Color.White);
         SolidBrush redBrush = new SolidBrush(Color.Red);
@@ -49,11 +57,13 @@ namespace Air_Hockey
         Pen grayPen = new Pen(Color.Gray, 10);
         Pen redPen = new Pen(Color.Red, 5);
         Pen bluePen = new Pen(Color.Blue, 5);
+        #endregion
 
+        #region sound players
         SoundPlayer horn = new SoundPlayer(Properties.Resources._170825__santino_c__sirene_horn);
         SoundPlayer hit = new SoundPlayer(Properties.Resources._266647__eelke__hit_hockey);
         SoundPlayer wall = new SoundPlayer(Properties.Resources._324246__permagnuslindborg__hockey_ball);
-
+        #endregion
         public Form1()
         {
             InitializeComponent();
@@ -208,14 +218,14 @@ namespace Air_Hockey
             }
             #endregion
 
-            #region ball colision left/right
-            //ball collision with left/right
-            if (ballY < 5 || ballY > 572)
+            #region ball colision left/right & top/bottom
+            //ball collision with left/right & top/bottom
+            if (ballY < topcourt || ballY > bottomcourt)
             {
                 ballYSpeed *= -1;  // or: ballYSpeed = -ballYSpeed; 
                 wall.Play();
             }
-            if (ballX > 570 || ballX < 210)
+            if (ballX > rightwall || ballX < leftwall)
             {
                 ballXSpeed *= -1;
                 wall.Play();
